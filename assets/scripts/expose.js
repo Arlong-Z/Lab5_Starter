@@ -3,11 +3,7 @@
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
-  const volume = document.getElementById('horn-select');
-  const play = document.getElementsByClassName('hidden')[0];
-  play.volume = this.value / 100;
-
-  volume.addEventListener('change', select_photo);
+  document.getElementById('horn-select').addEventListener('change', select_photo);
   document.querySelector('button').addEventListener('click', play_audio);
   document.getElementById('volume').addEventListener('input', change_volume);
 }
@@ -16,13 +12,16 @@ function select_photo(event) {
   const ouput = document.querySelector('#expose > img');
   const link = 'assets/images/' + event.target.value + '.svg';
   ouput.src = link;
+  const play = document.getElementsByClassName('hidden')[0];
   play.src = 'assets/audio/' + event.target.value  + '.mp3';
   play.type = 'audio/mpeg'
 }
 
 function play_audio(){
-  play.load();
-  play.play();
+  const aud = document.getElementsByClassName('hidden')[0];
+  console.log(aud);
+  aud.load();
+  aud.play();
   const current = document.getElementById('horn-select');
   if (current.value == 'party-horn'){
     const img = document.querySelector('#explore');
@@ -32,6 +31,7 @@ function play_audio(){
 }
 
 function change_volume(){
+  const play = document.getElementsByClassName('hidden')[0];
   play.volume = this.value / 100;
   const img = document.querySelector('#volume-controls > img');
   if (this.value == 0) {
