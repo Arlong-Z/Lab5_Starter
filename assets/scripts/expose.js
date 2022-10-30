@@ -2,7 +2,16 @@
 
 window.addEventListener('DOMContentLoaded', init);
 
+const body = document.querySelector('body');
+const { top, bottom, left, right } = body.getBoundingClientRect();
+// const img = document.querySelector('#explore');
+console.log({top, bottom,left,right});
+const jsConfetti = new JSConfetti();
+jsConfetti.x = ((left+right) / 2) / window.innerWidth;
+jsConfetti.y = ((top+bottom) / 2) / window.innerWidth
+
 function init() {
+  document.querySelector('.hidden').volume = 50 / 100;
   document.getElementById('horn-select').addEventListener('change', select_photo);
   document.querySelector('button').addEventListener('click', play_audio);
   document.getElementById('volume').addEventListener('input', change_volume);
@@ -19,13 +28,13 @@ function select_photo(event) {
 
 function play_audio(){
   const aud = document.getElementsByClassName('hidden')[0];
-  console.log(aud);
-  aud.load();
-  aud.play();
+  // console.log(aud);
   const current = document.getElementById('horn-select');
+  if (current.value != "select"){
+    aud.load();
+    aud.play();
+  }
   if (current.value == 'party-horn'){
-    const img = document.querySelector('#explore');
-    const jsConfetti = new JSConfetti({img});
     jsConfetti.addConfetti();
   }
 }
