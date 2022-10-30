@@ -18,9 +18,10 @@ function init() {
 }
 
 function select_photo(event) {
-  const ouput = document.querySelector('#expose > img');
+  const output = document.querySelector('#expose > img');
   const link = 'assets/images/' + event.target.value + '.svg';
-  ouput.src = link;
+  output.src = link;
+  output.alt = event.target.value;
   const play = document.getElementsByClassName('hidden')[0];
   play.src = 'assets/audio/' + event.target.value  + '.mp3';
   play.type = 'audio/mpeg'
